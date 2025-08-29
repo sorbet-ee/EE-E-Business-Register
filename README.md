@@ -8,7 +8,7 @@
 
 A professional Ruby interface for accessing Estonian company data, following the KISS principle. Built for developers who value simplicity, reliability, and clean code architecture.
 
-**Developed by [Sorbeet Payments OÜ](https://sorbet.ee)** - Estonia's premier FinTech infrastructure company.
+**Developed by [Sorbeet Payments OÜ](https://sorbet.ee)**.
 
 ---
 
