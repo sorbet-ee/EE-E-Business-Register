@@ -8,18 +8,18 @@ require "timeout"
 # Ruby compatibility fix: alias the old timeout constant to new ones
 Net::TimeoutError = Net::ReadTimeout unless defined?(Net::TimeoutError)
 
-require_relative "ee_e_business_register/version"
-require_relative "ee_e_business_register/errors"
-require_relative "ee_e_business_register/configuration"
-require_relative "ee_e_business_register/validation"
-require_relative "ee_e_business_register/types"
-require_relative "ee_e_business_register/models/company"
-require_relative "ee_e_business_register/models/classifier"
-require_relative "ee_e_business_register/models/trust"
-require_relative "ee_e_business_register/client"
-require_relative "ee_e_business_register/services/company_service"
-require_relative "ee_e_business_register/services/classifier_service"
-require_relative "ee_e_business_register/services/trusts_service"
+require_relative "version"
+require_relative "errors"
+require_relative "configuration"
+require_relative "validation"
+require_relative "types"
+require_relative "models/company"
+require_relative "models/classifier"
+require_relative "models/trust"
+require_relative "client"
+require_relative "services/company_service"
+require_relative "services/classifier_service"
+require_relative "services/trusts_service"
 
 # Estonian e-Business Register API Client
 #
