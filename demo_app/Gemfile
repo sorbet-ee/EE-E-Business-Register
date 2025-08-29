@@ -10,8 +10,8 @@ gem 'puma', '~> 6.0'
 # Template engine
 gem 'erb'
 
-# Use the local gem
-gem 'ee_e_business_register', path: '../ee_e_business_register'
+# Use the installed gem (built by make demo)
+gem 'ee_e_business_register'
 
 # Development tools
 group :development do

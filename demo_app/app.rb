@@ -2,7 +2,7 @@
 
 require 'sinatra/base'
 require 'sinatra/reloader'
-require_relative '../ee_e_business_register/lib/ee_e_business_register'
+require 'ee_e_business_register'
 require 'json'
 
 # Demo application for Estonian e-Business Register API
