@@ -1,0 +1,110 @@
+<h2>Company Information: <%= @company.name %></h2>
+
+<div class="card">
+  <h3>Basic Information</h3>
+  <div class="data-row">
+    <div class="data-label">Name:</div>
+    <div class="data-value"><strong><%= @company.name %></strong></div>
+  </div>
+  <div class="data-row">
+    <div class="data-label">Registry Code:</div>
+    <div class="data-value"><code><%= @company.registry_code %></code></div>
+  </div>
+  <div class="data-row">
+    <div class="data-label">Status:</div>
+    <div class="data-value">
+      <% if @company.status == 'R' %>
+        <span class="badge badge-success">Active</span>
+      <% else %>
+        <span class="badge badge-warning"><%= @company.status %></span>
+      <% end %>
+      <%= @company.status_text %>
+    </div>
+  </div>
+  <div class="data-row">
+    <div class="data-label">Legal Form:</div>
+    <div class="data-value"><%= @company.legal_form %> - <%= @company.legal_form_text %></div>
+  </div>
+  <% if @company.sub_type %>
+    <div class="data-row">
+      <div class="data-label">Sub Type:</div>
+      <div class="data-value"><%= @company.sub_type %> - <%= @company.sub_type_text %></div>
+    </div>
+  <% end %>
+</div>
+
+<div class="card">
+  <h3>Registration Details</h3>
+  <div class="data-row">
+    <div class="data-label">Registration Date:</div>
+    <div class="data-value"><%= format_date(@company.registration_date) %></div>
+  </div>
+  <% if @company.deletion_date %>
+    <div class="data-row">
+      <div class="data-label">Deletion Date:</div>
+      <div class="data-value"><%= format_date(@company.deletion_date) %></div>
+    </div>
+  <% end %>
+  <div class="data-row">
+    <div class="data-label">Region:</div>
+    <div class="data-value"><%= @company.region_text || @company.region %></div>
+  </div>
+  <% if @company.capital %>
+    <div class="data-row">
+      <div class="data-label">Capital:</div>
+      <div class="data-value"><%= format_money(@company.capital) %></div>
+    </div>
+  <% end %>
+</div>
+
+<% if @company.address %>
+  <div class="card">
+    <h3>Address</h3>
+    <div class="data-row">
+      <div class="data-label">Full Address:</div>
+      <div class="data-value"><%= @company.address.full_address %></div>
+    </div>
+    <% if @company.address.street %>
+      <div class="data-row">
+        <div class="data-label">Street:</div>
+        <div class="data-value"><%= @company.address.street %></div>
+      </div>
+    <% end %>
+    <% if @company.address.city %>
+      <div class="data-row">
+        <div class="data-label">City:</div>
+        <div class="data-value"><%= @company.address.city %></div>
+      </div>
+    <% end %>
+    <% if @company.address.postal_code %>
+      <div class="data-row">
+        <div class="data-label">Postal Code:</div>
+        <div class="data-value"><%= @company.address.postal_code %></div>
+      </div>
+    <% end %>
+    <% if @company.address.county %>
+      <div class="data-row">
+        <div class="data-label">County:</div>
+        <div class="data-value"><%= @company.address.county %></div>
+      </div>
+    <% end %>
+    <% if @company.address.country %>
+      <div class="data-row">
+        <div class="data-label">Country:</div>
+        <div class="data-value"><%= @company.address.country %></div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<div style="margin-top: 30px;">
+  <a href="/company/detailed" class="badge badge-info" style="padding: 10px 20px; text-decoration: none;">
+    📋 Get Detailed Data for <%= @company.registry_code %>
+  </a>
+  <a href="/representation" class="badge badge-info" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+    👥 View Representation Rights
+  </a>
+  <a href="/documents" class="badge badge-info" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+    📄 View Documents
+  </a>
+</div>

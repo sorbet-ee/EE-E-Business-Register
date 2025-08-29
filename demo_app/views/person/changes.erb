@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h5>🔍 Get Person Changes</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text">Get personnel changes for a company within a specific date range.</p>
+        
+        <% if @error %>
+          <div class="alert alert-danger" role="alert">
+            <%= @error %>
+          </div>
+        <% end %>
+        
+        <form method="POST" action="/person_changes">
+          <div class="form-group">
+            <label for="registry_code">Company Registry Code</label>
+            <input type="text" class="form-control" id="registry_code" name="registry_code" 
+                   placeholder="e.g., 16863232" required pattern="\d{8}"
+                   value="<%= params[:registry_code] %>">
+            <small class="form-text text-muted">8-digit Estonian company registry code</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="from_date">From Date (optional)</label>
+            <input type="date" class="form-control" id="from_date" name="from_date"
+                   value="<%= params[:from_date] %>">
+            <small class="form-text text-muted">Leave empty for all changes</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="to_date">To Date (optional)</label>
+            <input type="date" class="form-control" id="to_date" name="to_date"
+                   value="<%= params[:to_date] %>">
+            <small class="form-text text-muted">Leave empty for all changes</small>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Get Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h6>ℹ️ About Person Changes</h6>
+      </div>
+      <div class="card-body">
+        <p class="small">This endpoint retrieves information about personnel changes in a company.</p>
+        <p class="small">You can specify date ranges to filter changes to a specific time period.</p>
+      </div>
+    </div>
+  </div>
+</div>

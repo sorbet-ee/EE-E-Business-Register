@@ -1,0 +1,83 @@
+<h2>💼 Beneficial Owners for Company <%= @registry_code %></h2>
+
+<% if @error %>
+  <div class="error">
+    <p><strong>Error:</strong> <%= @error %></p>
+  </div>
+<% elsif @owners && @owners.any? %>
+  <div class="info">
+    Found <strong><%= @owners.size %></strong> beneficial owners.
+  </div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Control Method</th>
+        <th>Period</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @owners.each do |owner| %>
+        <tr>
+          <td>
+            <strong><%= owner[:eesnimi] %> <%= owner[:nimi] %></strong>
+            <% if owner[:valis_kood] %>
+              <br><small>ID: <%= owner[:valis_kood] %></small>
+            <% end %>
+          </td>
+          <td>
+            <% if owner[:valis_kood_riik_tekstina] %>
+              <%= owner[:valis_kood_riik_tekstina] %>
+            <% elsif owner[:aadress_riik_tekstina] %>
+              <%= owner[:aadress_riik_tekstina] %>
+            <% else %>
+              Unknown
+            <% end %>
+          </td>
+          <td>
+            <span class="badge badge-info">
+              <%= owner[:kontrolli_teostamise_viis_tekstina] || 'Unknown' %>
+            </span>
+          </td>
+          <td>
+            <% if owner[:algus_kpv] %>
+              <%= format_date(owner[:algus_kpv]) %>
+            <% end %>
+            <% if owner[:lopp_kpv] %>
+              - <%= format_date(owner[:lopp_kpv]) %>
+            <% elsif owner[:algus_kpv] %>
+              - Present
+            <% end %>
+          </td>
+          <td>
+            <% if owner[:lopp_kpv] %>
+              <span class="badge badge-secondary">Historical</span>
+            <% else %>
+              <span class="badge badge-success">Active</span>
+            <% end %>
+            <% if owner[:lahknevusteade_esitatud] %>
+              <br><span class="badge badge-warning">Discrepancy Notice</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="card">
+    <p>No beneficial owners found for this company.</p>
+    <p><small>This could mean the company is not required to submit beneficial owner information, or the data is not publicly available.</small></p>
+  </div>
+<% end %>
+
+<div style="margin-top: 30px;">
+  <a href="/beneficial_owners" class="badge badge-info" style="padding: 10px 20px; text-decoration: none;">
+    ← Try Another Company
+  </a>
+  <a href="/" class="badge badge-secondary" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+    🏠 Home
+  </a>
+</div>

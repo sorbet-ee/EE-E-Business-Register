@@ -1,0 +1,79 @@
+<h2>Welcome to the Estonian e-Business Register API Demo</h2>
+
+<p>This interactive demo application showcases the <strong>ee_e_business_register</strong> Ruby gem - a clean & simple interface to the Estonian e-Business Register API following the KISS principle.</p>
+
+<div class="info">
+  <strong>ℹ️ Note:</strong> You need valid API credentials to use this demo. Configure them in your environment variables or <code>.env</code> file.
+</div>
+
+<h3>Available API Endpoints</h3>
+
+<div class="grid">
+  <a href="/company/find" class="endpoint-card">
+    <h3>🔍 Find Company</h3>
+    <p>Look up a specific company by its 8-digit registry code. Returns basic company information including name, status, and address.</p>
+  </a>
+  
+  <a href="/company/detailed" class="endpoint-card">
+    <h3>📋 Detailed Company Data</h3>
+    <p>Get comprehensive company information including business activities, personnel, capital, and registration details.</p>
+  </a>
+  
+  <a href="/documents" class="endpoint-card">
+    <h3>📄 Company Documents</h3>
+    <p>Retrieve a list of documents filed by a company with the Estonian Business Register.</p>
+  </a>
+  
+  <a href="/reports/annual" class="endpoint-card">
+    <h3>📊 Annual Reports List</h3>
+    <p>Get a list of all annual reports filed by a company, with submission dates and report types.</p>
+  </a>
+  
+  <a href="/reports/data" class="endpoint-card">
+    <h3>💰 Annual Report Data</h3>
+    <p>Access detailed financial data from annual reports including balance sheet, income statement, and cash flow.</p>
+  </a>
+  
+  <a href="/representation" class="endpoint-card">
+    <h3>👥 Representatives</h3>
+    <p>View who has the right to represent the company, including board members and authorized signatories.</p>
+  </a>
+  
+  <a href="/person_changes" class="endpoint-card">
+    <h3>🔄 Person Changes</h3>
+    <p>Track personnel changes in a company over time, including board member and management updates.</p>
+  </a>
+  
+  <a href="/classifiers" class="endpoint-card">
+    <h3>📋 Classifiers</h3>
+    <p>Access reference data including legal forms, company statuses, regions, and other classification systems.</p>
+  </a>
+  
+  <a href="/health" class="endpoint-card">
+    <h3>💚 API Health & Status</h3>
+    <p>Check if the Estonian e-Business Register API is accessible and responding correctly.</p>
+  </a>
+</div>
+
+<div class="card">
+  <h3>🚀 Quick Start</h3>
+  <p>To test the API, try these sample Estonian companies:</p>
+  <ul>
+    <li><strong>Estonian Business Registry:</strong> Registry code <code>10060701</code></li>
+    <li><strong>Sorbeet Payments OÜ:</strong> Registry code <code>16863232</code></li>
+    <li><strong>Bolt Operations OÜ:</strong> Registry code <code>14532901</code></li>
+    <li><strong>Pipedrive OÜ:</strong> Registry code <code>12433421</code></li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>✨ Clean & Simple</h3>
+  <p>This gem follows the KISS principle:</p>
+  <ul>
+    <li>🚀 Simple & Fast - Clean API with intuitive method names</li>
+    <li>🛡️ Type Safe - Immutable data models using dry-struct</li>
+    <li>🌍 Bilingual - Estonian and English language support</li>
+    <li>📈 Production Ready - Built-in error handling and retry logic</li>
+    <li>🎯 Developer Friendly - Comprehensive documentation and examples</li>
+  </ul>
+</div>

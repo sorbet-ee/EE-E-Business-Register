@@ -1,0 +1,99 @@
+<h2>Detailed Company Data: <%= @detailed[:general_data][:name] %></h2>
+
+<% general = @detailed[:general_data] %>
+<% personnel = @detailed[:personnel_data] %>
+
+<div class="card">
+  <h3>General Information</h3>
+  <div class="data-row">
+    <div class="data-label">Business Name:</div>
+    <div class="data-value"><strong><%= general[:name] %></strong></div>
+  </div>
+  <div class="data-row">
+    <div class="data-label">Registry Code:</div>
+    <div class="data-value"><code><%= general[:registry_code] %></code></div>
+  </div>
+  <div class="data-row">
+    <div class="data-label">Status:</div>
+    <div class="data-value">
+      <% if general[:status] == 'R' %>
+        <span class="badge badge-success">Active</span>
+      <% else %>
+        <span class="badge badge-warning"><%= general[:status] %></span>
+      <% end %>
+      <%= general[:status_text] %>
+    </div>
+  </div>
+  <div class="data-row">
+    <div class="data-label">Legal Form:</div>
+    <div class="data-value"><%= general[:legal_form] %> - <%= general[:legal_form_text] %></div>
+  </div>
+  <% if general[:email] %>
+    <div class="data-row">
+      <div class="data-label">Email:</div>
+      <div class="data-value"><%= general[:email] %></div>
+    </div>
+  <% end %>
+  <% if general[:capital] %>
+    <div class="data-row">
+      <div class="data-label">Capital:</div>
+      <div class="data-value"><%= format_money(general[:capital]) %></div>
+    </div>
+  <% end %>
+  <% if general[:registration_date] %>
+    <div class="data-row">
+      <div class="data-label">Registration Date:</div>
+      <div class="data-value"><%= format_date(general[:registration_date]) %></div>
+    </div>
+  <% end %>
+</div>
+
+<% if general[:address] %>
+  <div class="card">
+    <h3>Address Information</h3>
+    <% address = general[:address] %>
+    <div class="data-row">
+      <div class="data-label">Street:</div>
+      <div class="data-value"><%= address[:asukoht_ettevotja_aadressis] %></div>
+    </div>
+    <div class="data-row">
+      <div class="data-label">Postal Code:</div>
+      <div class="data-value"><%= address[:indeks_ettevotja_aadressis] %></div>
+    </div>
+    <div class="data-row">
+      <div class="data-label">Location:</div>
+      <div class="data-value"><%= address[:asukoha_ehak_tekstina] %></div>
+    </div>
+    <div class="data-row">
+      <div class="data-label">Country:</div>
+      <div class="data-value"><%= address[:aadress_riik_tekstina] %></div>
+    </div>
+    <% if address[:aadress_ads__ads_normaliseeritud_taisaadress] %>
+      <div class="data-row">
+        <div class="data-label">Full Address:</div>
+        <div class="data-value"><%= address[:aadress_ads__ads_normaliseeritud_taisaadress] %></div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if personnel[:note] %>
+  <div class="card">
+    <h3>Personnel Data</h3>
+    <div class="info">
+      <strong>Note:</strong> <%= personnel[:note] %>
+    </div>
+  </div>
+<% end %>
+
+<div style="margin-top: 30px;">
+  <a href="/company/find" class="badge badge-info" style="padding: 10px 20px; text-decoration: none;">
+    🔍 Find Another Company
+  </a>
+  <a href="/representation" class="badge badge-info" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+    👥 View Representation Rights
+  </a>
+  <a href="/documents" class="badge badge-info" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+    📄 View Documents
+  </a>
+</div>

@@ -1,0 +1,32 @@
+<h2>💚 API Health Status</h2>
+
+<div class="card">
+  <% if @healthy %>
+    <div style="text-align: center; padding: 40px;">
+      <div style="font-size: 64px; margin-bottom: 20px;">✅</div>
+      <h3 style="color: #28a745;">API is Healthy</h3>
+      <p style="font-size: 18px; color: #666;"><%= @status_message %></p>
+    </div>
+  <% else %>
+    <div style="text-align: center; padding: 40px;">
+      <div style="font-size: 64px; margin-bottom: 20px;">❌</div>
+      <h3 style="color: #dc3545;">API is Unavailable</h3>
+      <p style="font-size: 18px; color: #666;"><%= @status_message %></p>
+    </div>
+  <% end %>
+</div>
+
+<div class="info" style="margin-top: 30px;">
+  <strong>ℹ️ Configuration:</strong>
+  <ul>
+    <li><strong>API Endpoint:</strong> <%= EeEBusinessRegister.configuration.endpoint_url %></li>
+    <li><strong>Language:</strong> <%= EeEBusinessRegister.configuration.language.upcase %></li>
+    <li><strong>Timeout:</strong> <%= EeEBusinessRegister.configuration.timeout %> seconds</li>
+  </ul>
+</div>
+
+<div style="margin-top: 30px;">
+  <a href="/" class="badge badge-secondary" style="padding: 10px 20px; text-decoration: none;">
+    🏠 Back to Home
+  </a>
+</div>

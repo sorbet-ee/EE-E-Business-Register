@@ -1,0 +1,75 @@
+<h2>📈 <%= @report_type.split('_').map(&:capitalize).join(' ') %> - <%= @year %></h2>
+<h3>Company <%= @registry_code %></h3>
+
+<% if @report_data %>
+  <div class="info">
+    <strong>Report Type:</strong> <%= @report_type.split('_').map(&:capitalize).join(' ') %> for year <%= @year %>
+  </div>
+  
+  <% if @report_data.respond_to?(:items) && @report_data.items %>
+    <table>
+      <thead>
+        <tr>
+          <th>Line Item</th>
+          <th>Code</th>
+          <th>Amount</th>
+          <th>Currency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @report_data.items.each do |item| %>
+          <tr>
+            <td><strong><%= item.name || item.description || 'Unnamed Item' %></strong></td>
+            <td>
+              <% if item.respond_to?(:code) && item.code %>
+                <code><%= item.code %></code>
+              <% else %>
+                <span class="badge badge-secondary">N/A</span>
+              <% end %>
+            </td>
+            <td>
+              <% if item.respond_to?(:amount) && item.amount %>
+                <strong style="<%= item.amount.to_f < 0 ? 'color: #dc3545;' : 'color: #28a745;' %>">
+                  <%= number_to_currency(item.amount) %>
+                </strong>
+              <% else %>
+                <span class="badge badge-secondary">N/A</span>
+              <% end %>
+            </td>
+            <td>
+              <%= item.currency if item.respond_to?(:currency) && item.currency %>
+              <%= 'EUR' unless item.respond_to?(:currency) && item.currency %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% elsif @report_data.is_a?(Hash) %>
+    <div class="card">
+      <h4>Financial Data:</h4>
+      <pre><%= JSON.pretty_generate(@report_data) %></pre>
+    </div>
+  <% else %>
+    <div class="card">
+      <p>Report data retrieved but format is not recognized for display.</p>
+      <p><small>Raw data type: <%= @report_data.class %></small></p>
+    </div>
+  <% end %>
+<% else %>
+  <div class="card">
+    <p>No report data found for company <%= @registry_code %> in year <%= @year %>.</p>
+    <p><small>This could mean the company hasn't filed this type of report for that year, or the data is not publicly available.</small></p>
+  </div>
+<% end %>
+
+<div style="margin-top: 30px;">
+  <a href="/reports/data" class="badge badge-info" style="padding: 10px 20px; text-decoration: none;">
+    ← Try Another Report
+  </a>
+  <a href="/reports/annual?registry_code=<%= @registry_code %>" class="badge badge-primary" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+    📊 View All Reports
+  </a>
+  <a href="/" class="badge badge-secondary" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+    🏠 Home
+  </a>
+</div>

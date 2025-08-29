@@ -1,0 +1,58 @@
+<h2>📄 Documents for Company <%= @registry_code %></h2>
+
+<% if @documents && @documents.any? %>
+  <div class="info">
+    Found <strong><%= @documents.size %></strong> documents.
+  </div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Document Info</th>
+        <th>Type</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @documents.each_with_index do |doc, index| %>
+        <tr>
+          <td><strong>Document <%= index + 1 %></strong></td>
+          <td>
+            <span class="badge badge-info">
+              <%= doc[:type] || doc[:document_type] || 'Document' %>
+            </span>
+          </td>
+          <td>
+            <% if doc.is_a?(Hash) %>
+              <button class="btn btn-sm btn-outline-info" type="button" data-toggle="collapse" 
+                      data-target="#doc-<%= index %>" aria-expanded="false">
+                View Details
+              </button>
+              <div class="collapse mt-2" id="doc-<%= index %>">
+                <div class="card card-body">
+                  <pre class="small"><%= highlight_json(doc) %></pre>
+                </div>
+              </div>
+            <% else %>
+              <%= doc.inspect %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="card">
+    <p>No documents found for this company.</p>
+    <p><small>This could mean the company has no public documents or the registry code is incorrect.</small></p>
+  </div>
+<% end %>
+
+<div style="margin-top: 30px;">
+  <a href="/documents" class="badge badge-info" style="padding: 10px 20px; text-decoration: none;">
+    ← Try Another Company
+  </a>
+  <a href="/" class="badge badge-secondary" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+    🏠 Home
+  </a>
+</div>

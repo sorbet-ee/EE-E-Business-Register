@@ -1,0 +1,46 @@
+<h2>👥 Get Representation Rights</h2>
+
+<% if @error %>
+  <div class="error">
+    <%= @error %>
+  </div>
+<% end %>
+
+<form method="post" action="/representation">
+  <div class="form-group">
+    <label for="registry_code">Company Registry Code:</label>
+    <input type="text" id="registry_code" name="registry_code" 
+           value="<%= @registry_code %>" 
+           placeholder="e.g., 16517213" 
+           pattern="[0-9]{8}" 
+           title="8-digit registry code" 
+           maxlength="8" 
+           required>
+    <small>Enter the 8-digit company registry code</small>
+  </div>
+  
+  <div class="form-group">
+    <label for="person_type">Person Type (Optional):</label>
+    <select id="person_type" name="person_type">
+      <option value="">-- All person types --</option>
+      <option value="legal" <%= 'selected' if @person_type == 'legal' %>>Legal Persons (Companies)</option>
+      <option value="natural" <%= 'selected' if @person_type == 'natural' %>>Natural Persons (Individuals)</option>
+    </select>
+    <small>Filter by type of person or leave blank for all</small>
+  </div>
+  
+  <button type="submit">Get Representation Rights</button>
+</form>
+
+<div class="info">
+  <strong>💡 About Representation Rights:</strong>
+  <p>This shows who has the legal authority to represent and bind the company in legal matters. This includes board members, authorized representatives, and other officials.</p>
+  
+  <strong>Sample Companies:</strong>
+  <ul>
+    <li><strong>Sorbeet Payments OÜ</strong>: <code>16863232</code> (FinTech with clear management structure)</li>
+    <li><strong>Swedbank AS</strong>: <code>10060701</code> (Large bank with extensive board)</li>
+    <li><strong>Bolt Operations OÜ</strong>: <code>14532901</code> (Tech company)</li>
+    <li><strong>Pipedrive OÜ</strong>: <code>12433421</code> (Software company)</li>
+  </ul>
+</div>

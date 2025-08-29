@@ -1,0 +1,48 @@
+<h2>💼 Get Beneficial Owners</h2>
+
+<div class="card">
+  <% if @error %>
+    <div class="error">
+      <%= @error %>
+    </div>
+  <% end %>
+
+  <form method="post" action="/beneficial_owners">
+    <div class="form-group">
+      <label for="registry_code">Estonian Company Registry Code (8 digits):</label>
+      <input 
+        type="text" 
+        id="registry_code" 
+        name="registry_code" 
+        value="<%= params[:registry_code] || '10060701' %>"
+        required 
+        pattern="[0-9]{8}" 
+        maxlength="8"
+        placeholder="e.g. 10060701"
+      >
+      <small>Enter an 8-digit Estonian company registry code</small>
+    </div>
+    
+    <div class="form-actions">
+      <button type="submit">Get Beneficial Owners</button>
+    </div>
+  </form>
+</div>
+
+<div class="info">
+  <h3>What are Beneficial Owners?</h3>
+  <p>Beneficial owners are individuals who ultimately own or control a company. This includes:</p>
+  <ul>
+    <li>Persons holding more than 25% of shares or voting rights</li>
+    <li>Persons exercising control through other means</li>
+    <li>Senior management officials in certain cases</li>
+    <li>Persons with the right to appoint or remove board members</li>
+  </ul>
+  
+  <h4>Example Companies:</h4>
+  <ul>
+    <li><strong>Swedbank AS:</strong> 10060701</li>
+    <li><strong>Tallinn Airport:</strong> 11051370</li>
+    <li><strong>Eesti Energia:</strong> 10421131</li>
+  </ul>
+</div>

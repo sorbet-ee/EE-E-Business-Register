@@ -1,0 +1,38 @@
+<h2>📋 Get Detailed Company Data</h2>
+
+<% if @error %>
+  <div class="error">
+    <%= @error %>
+  </div>
+<% end %>
+
+<form method="post" action="/company/detailed">
+  <div class="form-group">
+    <label for="registry_code">Registry Code (8 digits):</label>
+    <input type="text" 
+           id="registry_code" 
+           name="registry_code" 
+           pattern="\d{8}" 
+           maxlength="8"
+           placeholder="e.g., 10060701"
+           value="<%= @registry_code %>"
+           required>
+    <small style="color: #666;">Enter an 8-digit Estonian company registry code to get comprehensive data</small>
+  </div>
+  
+  <button type="submit">Get Detailed Data</button>
+</form>
+
+<div class="info" style="margin-top: 30px;">
+  <strong>Detailed Data Includes:</strong>
+  <ul>
+    <li>Complete company information and legal status</li>
+    <li>All registered addresses and contact details</li>
+    <li>Business activities (EMTAK codes)</li>
+    <li>Personnel data (board members, shareholders)</li>
+    <li>Capital structure and share information</li>
+    <li>Tax registration details</li>
+    <li>Communication channels</li>
+    <li>Related companies and branches</li>
+  </ul>
+</div>

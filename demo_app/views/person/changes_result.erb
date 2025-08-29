@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5>📋 Person Changes Results</h5>
+        <span class="badge badge-info"><%= @changes.size %> changes</span>
+      </div>
+      <div class="card-body">
+        <p><strong>Company:</strong> <%= @registry_code %></p>
+        
+        <% if @changes.empty? %>
+          <div class="alert alert-info" role="alert">
+            <h6>ℹ️ No Changes Found</h6>
+            <p>No personnel changes found for the specified criteria.</p>
+          </div>
+        <% else %>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Date</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @changes.each_with_index do |change, index| %>
+                  <tr>
+                    <td>
+                      <span class="badge badge-primary">
+                        <%= change[:type] || 'Personnel Change' %>
+                      </span>
+                    </td>
+                    <td><%= change[:description] || 'Personnel update' %></td>
+                    <td><%= format_date(change[:date]) %></td>
+                    <td>
+                      <% if change.is_a?(Hash) && change.keys.size > 3 %>
+                        <button class="btn btn-sm btn-outline-info" type="button" data-toggle="collapse" 
+                                data-target="#change-<%= index %>" aria-expanded="false">
+                          View Details
+                        </button>
+                        <div class="collapse mt-2" id="change-<%= index %>">
+                          <div class="card card-body">
+                            <pre class="small"><%= highlight_json(change) %></pre>
+                          </div>
+                        </div>
+                      <% else %>
+                        <span class="text-muted">No additional details</span>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col">
+    <a href="/person_changes" class="btn btn-secondary">🔍 New Search</a>
+    <a href="/" class="btn btn-outline-secondary">🏠 Home</a>
+  </div>
+</div>

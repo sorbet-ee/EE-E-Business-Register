@@ -1,0 +1,35 @@
+<h2>🔍 Find Company by Registry Code</h2>
+
+<% if @error %>
+  <div class="error">
+    <%= @error %>
+  </div>
+<% end %>
+
+<form method="post" action="/company/find">
+  <div class="form-group">
+    <label for="registry_code">Registry Code (8 digits):</label>
+    <input type="text" 
+           id="registry_code" 
+           name="registry_code" 
+           pattern="\d{8}" 
+           maxlength="8"
+           placeholder="e.g., 10060701"
+           value="<%= @registry_code %>"
+           required>
+    <small style="color: #666;">Enter an 8-digit Estonian company registry code</small>
+  </div>
+  
+  <button type="submit">Find Company</button>
+</form>
+
+<div class="info" style="margin-top: 30px;">
+  <strong>Example Registry Codes:</strong>
+  <ul>
+    <li>10060701 - Swedbank AS</li>
+    <li>14532901 - Bolt Operations OÜ</li>
+    <li>14041764 - Wise Europe SA</li>
+    <li>12433421 - Pipedrive OÜ</li>
+    <li>16863232 - Sorbeet Payments OÜ</li>
+  </ul>
+</div>

@@ -1,0 +1,59 @@
+<h2>Classifier: <%= @classifier_type.split('_').map(&:capitalize).join(' ') %></h2>
+
+<% if @classifier && @classifier.values && @classifier.values.any? %>
+  <div class="info">
+    Found <strong><%= @classifier.values.size %></strong> entries in this classifier.
+  </div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <% if @classifier.values.first.respond_to?(:description) %>
+          <th>Description</th>
+        <% end %>
+        <% if @classifier.values.first.respond_to?(:valid_from) %>
+          <th>Valid From</th>
+        <% end %>
+        <% if @classifier.values.first.respond_to?(:valid_to) %>
+          <th>Valid To</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @classifier.values.each do |item| %>
+        <tr>
+          <td><code><%= item.code %></code></td>
+          <td><strong><%= item.name %></strong></td>
+          <% if item.respond_to?(:description) %>
+            <td><%= item.description %></td>
+          <% end %>
+          <% if item.respond_to?(:valid_from) %>
+            <td><%= format_date(item.valid_from) %></td>
+          <% end %>
+          <% if item.respond_to?(:valid_to) %>
+            <td>
+              <% if item.valid_to %>
+                <%= format_date(item.valid_to) %>
+                <span class="badge badge-warning">Expired</span>
+              <% else %>
+                <span class="badge badge-success">Active</span>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="card">
+    <p>No data available for this classifier.</p>
+  </div>
+<% end %>
+
+<div style="margin-top: 30px;">
+  <a href="/classifiers" class="badge badge-info" style="padding: 10px 20px; text-decoration: none;">
+    ← Back to Classifiers
+  </a>
+</div>

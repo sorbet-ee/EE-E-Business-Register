@@ -1,0 +1,36 @@
+<h2>📋 Get Classifier Data</h2>
+
+<% if @error %>
+  <div class="error">
+    <%= @error %>
+  </div>
+<% end %>
+
+<form method="post" action="/classifiers">
+  <div class="form-group">
+    <label for="classifier_type">Select Classifier Type:</label>
+    <select id="classifier_type" name="classifier_type" required>
+      <option value="">-- Select a classifier --</option>
+      <% @classifier_types.each do |name, value| %>
+        <option value="<%= value %>" <%= 'selected' if @classifier_type == value %>><%= name %></option>
+      <% end %>
+    </select>
+    <small style="color: #666;">Choose the type of reference data you need</small>
+  </div>
+  
+  <button type="submit">Get Classifier Data</button>
+</form>
+
+<div class="info" style="margin-top: 30px;">
+  <strong>Available Classifiers:</strong>
+  <ul>
+    <li><strong>Legal Forms</strong> - Company legal structures (OÜ, AS, MTÜ, etc.)</li>
+    <li><strong>Company Statuses</strong> - Registration statuses (Active, Liquidation, Deleted)</li>
+    <li><strong>Person Roles</strong> - Roles in companies (Board member, Shareholder, etc.)</li>
+    <li><strong>Regions</strong> - Estonian administrative regions</li>
+    <li><strong>Countries</strong> - Country codes and names</li>
+    <li><strong>Report Types</strong> - Annual report classifications</li>
+    <li><strong>Company Subtypes</strong> - Detailed company type classifications</li>
+    <li><strong>Currencies</strong> - Supported currency codes</li>
+  </ul>
+</div>

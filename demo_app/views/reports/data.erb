@@ -1,0 +1,58 @@
+<h2>📈 Get Annual Report Data</h2>
+
+<% if @error %>
+  <div class="error">
+    <%= @error %>
+  </div>
+<% end %>
+
+<form method="post" action="/reports/data">
+  <div class="form-group">
+    <label for="registry_code">Company Registry Code:</label>
+    <input type="text" id="registry_code" name="registry_code" 
+           value="<%= params[:registry_code] || @registry_code %>" 
+           placeholder="e.g., 16517213" 
+           pattern="[0-9]{8}" 
+           title="8-digit registry code" 
+           maxlength="8" 
+           required>
+    <small>Enter the 8-digit company registry code</small>
+  </div>
+  
+  <div class="form-group">
+    <label for="year">Report Year:</label>
+    <input type="number" id="year" name="year" 
+           value="<%= params[:year] || @year || Date.today.year - 1 %>" 
+           min="2000" 
+           max="<%= Date.today.year %>" 
+           required>
+    <small>Year of the annual report to retrieve</small>
+  </div>
+  
+  <div class="form-group">
+    <label for="report_type">Report Type:</label>
+    <select id="report_type" name="report_type">
+      <option value="balance_sheet" <%= 'selected' if @report_type == 'balance_sheet' %>>Balance Sheet</option>
+      <option value="income_statement" <%= 'selected' if @report_type == 'income_statement' %>>Income Statement</option>
+      <option value="cash_flow" <%= 'selected' if @report_type == 'cash_flow' %>>Cash Flow Statement</option>
+    </select>
+    <small>Choose which financial statement to retrieve</small>
+  </div>
+  
+  <button type="submit">Get Report Data</button>
+</form>
+
+<div class="info">
+  <strong>💡 About Financial Statements:</strong>
+  <ul>
+    <li><strong>Balance Sheet</strong>: Assets, liabilities, and equity at a point in time</li>
+    <li><strong>Income Statement</strong>: Revenue, expenses, and profit/loss for the year</li>
+    <li><strong>Cash Flow Statement</strong>: Cash inflows and outflows during the year</li>
+  </ul>
+  
+  <strong>Sample Data:</strong>
+  <ul>
+    <li><strong>Swedbank AS (10060701)</strong>: Year 2023 - Comprehensive banking reports</li>
+    <li><strong>Sorbeet Payments (16863232)</strong>: Year 2023 - FinTech company</li>
+  </ul>
+</div>

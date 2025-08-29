@@ -1,0 +1,55 @@
+<h2>📊 Annual Reports for Company <%= @registry_code %></h2>
+
+<% if @reports && @reports.any? %>
+  <div class="info">
+    Found <strong><%= @reports.size %></strong> annual reports.
+  </div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Report Period</th>
+        <th>Report Type</th>
+        <th>Filing Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reports.each do |report| %>
+        <tr>
+          <td><strong><%= report[:aruande_aasta] %></strong></td>
+          <td>
+            <%= format_date(report[:majandusaasta_algus]) if report[:majandusaasta_algus] %>
+            -
+            <%= format_date(report[:majandusaasta_lopp]) if report[:majandusaasta_lopp] %>
+          </td>
+          <td>
+            <span class="badge badge-info"><%= report[:aruande_nimetus] %></span>
+          </td>
+          <td>-</td>
+          <td>
+            <a href="/reports/data?registry_code=<%= @registry_code %>&year=<%= report[:aruande_aasta] %>" 
+               class="badge badge-primary" style="text-decoration: none;">
+              View Details
+            </a>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="card">
+    <p>No annual reports found for this company.</p>
+    <p><small>This could mean the company hasn't filed reports yet, they are not publicly available, or the registry code is incorrect.</small></p>
+  </div>
+<% end %>
+
+<div style="margin-top: 30px;">
+  <a href="/reports/annual" class="badge badge-info" style="padding: 10px 20px; text-decoration: none;">
+    ← Try Another Company
+  </a>
+  <a href="/" class="badge badge-secondary" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+    🏠 Home
+  </a>
+</div>

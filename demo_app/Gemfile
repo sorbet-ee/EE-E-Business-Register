@@ -1,0 +1,20 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+
+# Web framework
+gem 'sinatra', '~> 3.0'
+gem 'sinatra-contrib', '~> 3.0'
+gem 'puma', '~> 6.0'
+
+# Template engine
+gem 'erb'
+
+# Use the local gem
+gem 'ee_e_business_register', path: '../ee_e_business_register'
+
+# Development tools
+group :development do
+  gem 'rerun'
+  gem 'pry'
+end

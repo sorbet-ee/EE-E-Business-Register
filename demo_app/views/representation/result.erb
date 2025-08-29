@@ -1,0 +1,61 @@
+<h2>👥 Representatives for Company <%= @registry_code %></h2>
+
+<% if @representation && @representation.any? %>
+  <div class="info">
+    Found <strong><%= @representation.size %></strong> people with representation rights.
+  </div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Representative Info</th>
+        <th>Role</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @representation.each_with_index do |person, index| %>
+        <tr>
+          <td>
+            <strong>Representative <%= index + 1 %></strong><br>
+            <small><%= person[:name] || 'Name not available' %></small>
+          </td>
+          <td>
+            <span class="badge badge-primary">
+              <%= person[:role] || 'Representative' %>
+            </span>
+          </td>
+          <td>
+            <% if person.is_a?(Hash) %>
+              <button class="btn btn-sm btn-outline-info" type="button" data-toggle="collapse" 
+                      data-target="#rep-<%= index %>" aria-expanded="false">
+                View Details
+              </button>
+              <div class="collapse mt-2" id="rep-<%= index %>">
+                <div class="card card-body">
+                  <pre class="small"><%= highlight_json(person) %></pre>
+                </div>
+              </div>
+            <% else %>
+              <%= person.inspect %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="card">
+    <p>No representatives found for this company.</p>
+    <p><small>This could mean the company has no registered representatives, they are not publicly available, or the registry code is incorrect.</small></p>
+  </div>
+<% end %>
+
+<div style="margin-top: 30px;">
+  <a href="/representation" class="badge badge-info" style="padding: 10px 20px; text-decoration: none;">
+    ← Try Another Company
+  </a>
+  <a href="/" class="badge badge-secondary" style="padding: 10px 20px; text-decoration: none; margin-left: 10px;">
+    🏠 Home
+  </a>
+</div>

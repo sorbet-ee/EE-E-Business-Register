@@ -1,0 +1,33 @@
+<h2>📄 Get Company Documents</h2>
+
+<% if @error %>
+  <div class="error">
+    <%= @error %>
+  </div>
+<% end %>
+
+<form method="post" action="/documents">
+  <div class="form-group">
+    <label for="registry_code">Company Registry Code:</label>
+    <input type="text" id="registry_code" name="registry_code" 
+           value="<%= @registry_code %>" 
+           placeholder="e.g., 16863232" 
+           pattern="[0-9]{8}" 
+           title="8-digit registry code" 
+           maxlength="8" 
+           required>
+    <small>Enter the 8-digit company registry code</small>
+  </div>
+  
+  <button type="submit">Get Documents</button>
+</form>
+
+<div class="info">
+  <strong>💡 Sample Companies:</strong>
+  <ul>
+    <li><strong>Sorbeet Payments OÜ</strong>: <code>16863232</code> (FinTech)</li>
+    <li><strong>Swedbank AS</strong>: <code>10060701</code> (Banking)</li>
+    <li><strong>Bolt Operations OÜ</strong>: <code>14532901</code> (Tech/Transport)</li>
+    <li><strong>Pipedrive OÜ</strong>: <code>12433421</code> (Software)</li>
+  </ul>
+</div>

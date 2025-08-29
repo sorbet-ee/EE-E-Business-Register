@@ -1,0 +1,36 @@
+<h2>📊 Get Annual Reports</h2>
+
+<% if @error %>
+  <div class="error">
+    <%= @error %>
+  </div>
+<% end %>
+
+<form method="post" action="/reports/annual">
+  <div class="form-group">
+    <label for="registry_code">Company Registry Code:</label>
+    <input type="text" id="registry_code" name="registry_code" 
+           value="<%= @registry_code %>" 
+           placeholder="e.g., 16517213" 
+           pattern="[0-9]{8}" 
+           title="8-digit registry code" 
+           maxlength="8" 
+           required>
+    <small>Enter the 8-digit company registry code</small>
+  </div>
+  
+  <button type="submit">Get Annual Reports</button>
+</form>
+
+<div class="info">
+  <strong>💡 About Annual Reports:</strong>
+  <p>Annual reports contain financial statements including balance sheets, income statements, and cash flow statements. Estonian companies are required to file these annually.</p>
+  
+  <strong>Sample Companies with Reports:</strong>
+  <ul>
+    <li><strong>Sorbeet Payments OÜ</strong>: <code>16863232</code> (Recent FinTech company)</li>
+    <li><strong>Swedbank AS</strong>: <code>10060701</code> (Major bank with extensive reports)</li>
+    <li><strong>Bolt Operations OÜ</strong>: <code>14532901</code> (Tech company)</li>
+    <li><strong>Pipedrive OÜ</strong>: <code>12433421</code> (Software company)</li>
+  </ul>
+</div>

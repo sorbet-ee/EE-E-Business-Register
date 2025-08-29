@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= @title %> | Estonian e-Business Register API Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    
+    header h1 {
+      color: #667eea;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    
+    nav {
+      margin-top: 15px;
+    }
+    
+    nav a {
+      display: inline-block;
+      padding: 8px 16px;
+      background: #667eea;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      transition: background 0.3s;
+    }
+    
+    nav a:hover {
+      background: #764ba2;
+    }
+    
+    .main-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    h2 {
+      color: #667eea;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #eee;
+    }
+    
+    h3 {
+      color: #764ba2;
+      margin: 20px 0 10px 0;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #555;
+    }
+    
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="date"]:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    button {
+      background: #667eea;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    button:hover {
+      background: #764ba2;
+    }
+    
+    .error {
+      background: #fee;
+      color: #c33;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border: 1px solid #fcc;
+    }
+    
+    .success {
+      background: #efe;
+      color: #3c3;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border: 1px solid #cfc;
+    }
+    
+    .info {
+      background: #e7f3ff;
+      color: #0066cc;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border: 1px solid #b3d9ff;
+    }
+    
+    .card {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .card h3 {
+      margin-top: 0;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    
+    .endpoint-card {
+      background: white;
+      border: 2px solid #eee;
+      border-radius: 8px;
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s;
+    }
+    
+    .endpoint-card:hover {
+      border-color: #667eea;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+      transform: translateY(-2px);
+    }
+    
+    .endpoint-card h3 {
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+    
+    .endpoint-card p {
+      color: #666;
+      font-size: 14px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+      background: #f8f9fa;
+      font-weight: bold;
+      color: #667eea;
+    }
+    
+    tr:hover {
+      background: #f8f9fa;
+    }
+    
+    .data-row {
+      display: flex;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .data-label {
+      font-weight: bold;
+      color: #555;
+      flex: 0 0 200px;
+    }
+    
+    .data-value {
+      flex: 1;
+      color: #333;
+    }
+    
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      border: 1px solid #ddd;
+    }
+    
+    code {
+      font-family: 'Courier New', monospace;
+      background: #f4f4f4;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    
+    .badge-success {
+      background: #28a745;
+      color: white;
+    }
+    
+    .badge-warning {
+      background: #ffc107;
+      color: #333;
+    }
+    
+    .badge-danger {
+      background: #dc3545;
+      color: white;
+    }
+    
+    .badge-info {
+      background: #17a2b8;
+      color: white;
+    }
+    
+    footer {
+      text-align: center;
+      color: white;
+      margin-top: 40px;
+      padding: 20px;
+    }
+    
+    footer a {
+      color: white;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🏛️ Estonian e-Business Register API Demo</h1>
+      <p>Interactive demonstration of all API endpoints using the <strong>ee_e_business_register</strong> gem</p>
+      <nav>
+        <a href="/">🏠 Home</a>
+        <a href="/company/find">🔍 Find Company</a>
+        <a href="/company/detailed">📋 Detailed Data</a>
+        <a href="/documents">📄 Documents</a>
+        <a href="/reports/annual">📊 Reports</a>
+        <a href="/representation">👥 Representation</a>
+        <a href="/beneficial_owners">💼 Beneficial Owners</a>
+        <a href="/classifiers">📋 Classifiers</a>
+        <a href="/health">💚 Health</a>
+      </nav>
+    </header>
+    
+    <div class="main-content">
+      <%= yield %>
+    </div>
+    
+    <footer>
+      <p>
+        Powered by <strong>ee_e_business_register</strong> gem<br>
+        Developed by <a href="https://sorbet.ee">Sorbeet Payments OÜ</a><br>
+        Support: angelos@sorbet.ee
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
