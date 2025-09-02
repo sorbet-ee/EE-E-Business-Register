@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    ee_e_business_register (0.3.0)
-      activesupport (~> 7.0)
+    ee_e_business_register (0.4.0)
+      activesupport (~> 8.0)
       dry-struct (~> 1.6)
       dry-types (~> 1.7)
       savon (~> 2.14)
