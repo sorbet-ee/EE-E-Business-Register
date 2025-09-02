@@ -204,7 +204,7 @@ class TestEeEBusinessRegister < Minitest::Test
   # ========================================
 
   def test_version_defined
-    assert_equal '0.3.0', EeEBusinessRegister::VERSION
+    assert_equal '0.5.2', EeEBusinessRegister::VERSION
   end
 
   # ========================================

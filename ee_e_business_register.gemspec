@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
 
   # Runtime dependencies
   spec.add_dependency "savon", "~> 2.14"
-  spec.add_dependency "activesupport", "~> 7.0"
+  spec.add_dependency "activesupport", ">= 7.0", "< 9.0"
   spec.add_dependency "dry-types", "~> 1.7"
   spec.add_dependency "dry-struct", "~> 1.6"
 
